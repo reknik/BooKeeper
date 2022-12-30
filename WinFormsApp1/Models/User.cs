@@ -16,6 +16,13 @@ public partial class User
         Books = new HashSet<Book>();
     }
 
+    public User(string username, string password)
+    {
+        this.Username = username;
+        this.Password = password;
+        Books = new HashSet<Book>();
+    }
+
     [Required]
     [Column("username")]
     [StringLength(16)]

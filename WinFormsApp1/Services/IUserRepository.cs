@@ -9,6 +9,8 @@ namespace BooKeeper.Services;
 
 public interface IUserRepository
 {
-    User GetUserByEmail(string email);
-    User GetUserByUsername(string username);
+    User? GetUserByEmail(string email);
+    User? GetUserByUsername(string username);
+
+    void SaveUser(User user);
 }

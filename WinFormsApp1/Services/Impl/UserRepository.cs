@@ -22,10 +22,9 @@ public class UserRepository : IUserRepository
         _users = dbContext.Users;
     }
 
-    public User GetUserByEmail(string email)
-    {
-        return _users.First(user => user.Email.Equals(email));
-    }
+    public User? GetUserByEmail(string email) => _users.FirstOrDefault(user => user.Email.Equals(email));
 
     public User? GetUserByUsername(string username) => _users.FirstOrDefault(user => user.Username.Equals(username));
+
+    public void SaveUser(User user) => _users.Append(user);
 }

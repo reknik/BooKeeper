@@ -1,3 +1,4 @@
+using BooKeeper;
 using BooKeeper.Data;
 using BooKeeper.Services;
 using BooKeeper.Services.Impl;
@@ -26,7 +27,7 @@ namespace WinFormsApp1
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(ServiceProvider.GetRequiredService<Form1>());
+            Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
         }
 
         public static IServiceProvider? ServiceProvider { get; private set; }
@@ -38,7 +39,9 @@ namespace WinFormsApp1
                     services.AddScoped<IBookRepository, BookRepository>();
                     services.AddScoped<IUserRepository, UserRepository>();
                     services.AddScoped<ICategoryRepository, CategoryRepository>();
-                    services.AddScoped<Form1>();
+                    services.AddScoped<LoginForm>();
+                    services.AddScoped<RegisterForm>();
+
                 });
         }
     }

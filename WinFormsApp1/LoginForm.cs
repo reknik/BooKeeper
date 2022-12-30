@@ -1,14 +1,15 @@
+using BCrypt.Net;
 using BooKeeper.Models;
 using BooKeeper.Services;
 using MySql.Data.MySqlClient;
 
 namespace WinFormsApp1;
 
-public partial class Form1 : Form
+public partial class LoginForm : Form
 {
     private readonly IUserRepository _userRepository;
 
-    public Form1(IUserRepository userRepository)
+    public LoginForm(IUserRepository userRepository)
     {
         InitializeComponent();
         _userRepository = userRepository;
@@ -19,7 +20,7 @@ public partial class Form1 : Form
         string username = usernameTextBox.Text;
         string password = passwordTextBox.Text;
         User? user = _userRepository.GetUserByUsername(username);
-        if(user == null || !user.Password.Equals(password.Trim()))
+        if(user == null || !BCrypt.Net.BCrypt.Verify(password, user.Password))
         {
             errorLabel.Text = "Username or password are wrong";
         }

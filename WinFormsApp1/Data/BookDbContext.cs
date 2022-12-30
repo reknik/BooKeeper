@@ -8,13 +8,13 @@ using System.Configuration;
 
 namespace BooKeeper.Data
 {
-    public partial class myDbContext : DbContext
+    public partial class BookDbContext : DbContext
     {
-        public myDbContext()
+        public BookDbContext()
         {
         }
 
-        public myDbContext(DbContextOptions<myDbContext> options)
+        public BookDbContext(DbContextOptions<BookDbContext> options)
             : base(options)
         {
         }

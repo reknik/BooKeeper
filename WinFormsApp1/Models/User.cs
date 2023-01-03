@@ -35,6 +35,7 @@ public partial class User
     [StringLength(32)]
     public string Password { get; set; }
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("id")]
     public int Id { get; set; }
 

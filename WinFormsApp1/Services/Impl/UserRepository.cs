@@ -26,5 +26,9 @@ public class UserRepository : IUserRepository
 
     public User? GetUserByUsername(string username) => _users.FirstOrDefault(user => user.Username.Equals(username));
 
-    public void SaveUser(User user) => _users.Append(user);
+    public void SaveUser(User user)
+    {
+        _dbContext.Add<User>(user);
+        _dbContext.SaveChanges();
+    }
 }

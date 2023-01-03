@@ -34,6 +34,7 @@
             this.Title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.errorLabel = new System.Windows.Forms.Label();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             // 
             // loginButton
             // 
-            this.loginButton.Location = new System.Drawing.Point(51, 180);
+            this.loginButton.Location = new System.Drawing.Point(51, 161);
             this.loginButton.Name = "loginButton";
             this.loginButton.Size = new System.Drawing.Size(75, 23);
             this.loginButton.TabIndex = 2;
@@ -77,6 +78,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.errorLabel);
             this.panel1.Controls.Add(this.loginButton);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -95,7 +97,18 @@
             this.errorLabel.Size = new System.Drawing.Size(0, 15);
             this.errorLabel.TabIndex = 3;
             // 
-            // Form1
+            // linkLabel1
+            // 
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(51, 187);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(75, 15);
+            this.linkLabel1.TabIndex = 4;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Register here";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -104,7 +117,7 @@
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTextBox);
             this.Controls.Add(this.panel1);
-            this.Name = "Form1";
+            this.Name = "LoginForm";
             this.Text = "BooKeeper";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -121,5 +134,6 @@
         private Label Title;
         private Panel panel1;
         private Label errorLabel;
+        private LinkLabel linkLabel1;
     }
 }

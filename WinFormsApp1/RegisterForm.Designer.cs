@@ -72,7 +72,7 @@ partial class RegisterForm
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(322, 243);
+            this.panel1.Size = new System.Drawing.Size(386, 243);
             this.panel1.TabIndex = 8;
             // 
             // confirmPasswordErrorLabel
@@ -140,16 +140,16 @@ partial class RegisterForm
             this.Title.TabIndex = 7;
             this.Title.Text = "BooKeeper !!";
             // 
-            // Register
+            // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(322, 243);
+            this.ClientSize = new System.Drawing.Size(386, 243);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.usernameTextBox);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Title);
-            this.Name = "Register";
+            this.Controls.Add(this.panel1);
+            this.Name = "RegisterForm";
             this.Text = "Register";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 #nullable disable
@@ -40,4 +41,16 @@ public partial class Book
     [ForeignKey(nameof(Loaner))]
     [InverseProperty(nameof(User.Books))]
     public virtual User LoanerNavigation { get; set; }
+
+    public string toString()
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.AppendLine("Title : " + this.Title);
+        stringBuilder.AppendLine("Author : " + this.Author);
+        stringBuilder.AppendLine("Category : " + this.CategoryNavigation.Name);
+        stringBuilder.AppendLine("Year of release : " + this.Year);
+        stringBuilder.AppendLine("Description : " + this.Description);
+
+        return stringBuilder.ToString();
+    }
 }

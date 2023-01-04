@@ -12,7 +12,8 @@ public partial class LoginForm : Form
 
     private readonly RegisterForm _registerForm;
 
-    public LoginForm(IUserRepository userRepository, RegisterForm registerForm)
+
+    public LoginForm(IUserRepository userRepository, RegisterForm registerForm, UserForm userForm)
     {
         InitializeComponent();
         _userRepository = userRepository;
@@ -29,7 +30,7 @@ public partial class LoginForm : Form
             errorLabel.Text = "Username or password are wrong";
             return;
         }
-        MessageBox.Show("Iee");
+        this.Hide();
     }
 
     private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

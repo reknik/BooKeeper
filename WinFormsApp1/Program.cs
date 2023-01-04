@@ -40,8 +40,7 @@ namespace WinFormsApp1
                     services.AddScoped<IUserRepository, UserRepository>();
                     services.AddScoped<ICategoryRepository, CategoryRepository>();
                     services.AddScoped<LoginForm>();
-                    services.AddScoped<RegisterForm, RegisterForm>();
-
+                    services.AddScoped<RegisterForm>();
                 });
         }
     }

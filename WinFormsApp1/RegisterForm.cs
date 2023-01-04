@@ -19,8 +19,6 @@ public partial class RegisterForm : Form
 
     private readonly IUserRepository _userRepository;
 
-    private readonly string? _salt = System.Configuration.ConfigurationManager.AppSettings["salt"];
-
     public RegisterForm(IUserRepository userRepository)
     {
         this._userRepository = userRepository;
@@ -75,7 +73,7 @@ public partial class RegisterForm : Form
         string username = usernameTextBox.Text.Trim();
         string password = BCrypt.Net.BCrypt.HashPassword(passwordTextBox.Text.Trim());
         _userRepository.SaveUser(new User(username, password));
-        MessageBox.Show("Registration successfull");
+        MessageBox.Show("Registration successful");
         this.Close();
     }
 }

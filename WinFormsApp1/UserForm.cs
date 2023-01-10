@@ -61,6 +61,10 @@ public partial class UserForm : Form
 
         DialogResult dr = MessageBox.Show("Are you sure you want to reserve this book?", 
             "Confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+        if(dr != DialogResult.Yes)
+        {
+            return;
+        }
         Book selectedBook = (Book)allBooksList.SelectedItem;
         if (selectedBook.Available.Equals(0))
         {
@@ -103,5 +107,18 @@ public partial class UserForm : Form
             return;
         }
         allBooksTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+    }
+
+    private void editBooksButton_Click(object sender, EventArgs e)
+    {
+        if (allBooksList.SelectedItem == null)
+        {
+            MessageBox.Show("Please select a book");
+            return;
+        }
+
+        new EditBookForm((Book)allBooksList.SelectedItem, _categoryRepository, _bookRepository).ShowDialog();
+        allBooksList_SelectedIndexChanged(sender, e);
+        userBookList_SelectedIndexChanged(sender, e);
     }
 }

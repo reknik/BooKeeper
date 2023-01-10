@@ -79,6 +79,7 @@ partial class UserForm
             this.editBooksButton.TabIndex = 10;
             this.editBooksButton.Text = "Edit books";
             this.editBooksButton.UseVisualStyleBackColor = true;
+            this.editBooksButton.Click += new System.EventHandler(this.editBooksButton_Click);
             // 
             // reserveButton
             // 

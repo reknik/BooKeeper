@@ -38,4 +38,6 @@ public class BookRepository : IBookRepository
         book.Available--;
         _dbContext.SaveChanges();
     }
+
+    public void SaveBook(Book book) => _dbContext.SaveChanges();
 }

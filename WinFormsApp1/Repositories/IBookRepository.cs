@@ -17,4 +17,6 @@ public interface IBookRepository
     Book? GetBookByIdWithCategory(int selectedBookId);
 
     void ReserveBook(User user, Book book);
+
+    void SaveBook(Book book);
 }

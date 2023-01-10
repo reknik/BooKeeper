@@ -22,6 +22,7 @@ namespace BooKeeper.Data
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserBook> UserBooks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -40,12 +41,24 @@ namespace BooKeeper.Data
                     .HasForeignKey(d => d.Category)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("category");
+            });
 
-                entity.HasOne(d => d.LoanerNavigation)
-                    .WithMany(p => p.Books)
-                    .HasForeignKey(d => d.Loaner)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("loaner");
+            modelBuilder.Entity<UserBook>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.BookId })
+                    .HasName("PRIMARY");
+
+                entity.HasOne(d => d.Book)
+                    .WithMany(p => p.UserBooks)
+                    .HasForeignKey(d => d.BookId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("bookId");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserBooks)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("userId");
             });
 
             OnModelCreatingPartial(modelBuilder);

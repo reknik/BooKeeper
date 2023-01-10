@@ -7,50 +7,54 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace BooKeeper.Models;
-
-[Table("book")]
-[Index(nameof(Category), Name = "category_idx")]
-[Index(nameof(Loaner), Name = "loaner_idx")]
-public partial class Book
+namespace BooKeeper.Models
 {
-    [Key]
-    [Column("id")]
-    public int Id { get; set; }
-    [Required]
-    [Column("title")]
-    [StringLength(90)]
-    public string Title { get; set; }
-    [Required]
-    [Column("author")]
-    [StringLength(45)]
-    public string Author { get; set; }
-    [Column("year", TypeName = "date")]
-    public DateTime Year { get; set; }
-    [Column("loaner")]
-    public int? Loaner { get; set; }
-    [Column("category")]
-    public int Category { get; set; }
-    [Column("description")]
-    [StringLength(250)]
-    public string Description { get; set; }
-
-    [ForeignKey(nameof(Category))]
-    [InverseProperty("Books")]
-    public virtual Category CategoryNavigation { get; set; }
-    [ForeignKey(nameof(Loaner))]
-    [InverseProperty(nameof(User.Books))]
-    public virtual User LoanerNavigation { get; set; }
-
-    public string toString()
+    [Table("book")]
+    [Index(nameof(Category), Name = "category_idx")]
+    public partial class Book
     {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.AppendLine("Title : " + this.Title);
-        stringBuilder.AppendLine("Author : " + this.Author);
-        stringBuilder.AppendLine("Category : " + this.CategoryNavigation.Name);
-        stringBuilder.AppendLine("Year of release : " + this.Year);
-        stringBuilder.AppendLine("Description : " + this.Description);
+        public Book() => UserBooks = new HashSet<UserBook>();
 
-        return stringBuilder.ToString();
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+        [Required]
+        [Column("title")]
+        [StringLength(90)]
+        public string Title { get; set; }
+        [Required]
+        [Column("author")]
+        [StringLength(45)]
+        public string Author { get; set; }
+        [Column("year", TypeName = "date")]
+        public DateTime Year { get; set; }
+        [Column("category")]
+        public int Category { get; set; }
+        [Column("description")]
+        [StringLength(250)]
+        public string Description { get; set; }
+        [Column("available")]
+        public int Available { get; set; }
+        [Column("totalNumber")]
+        public int TotalNumber { get; set; }
+
+        [ForeignKey(nameof(Category))]
+        [InverseProperty("Books")]
+        public virtual Category CategoryNavigation { get; set; }
+        [InverseProperty(nameof(UserBook.Book))]
+        public virtual ICollection<UserBook> UserBooks { get; set; }
+
+        public override string ToString()
+        {
+            return new StringBuilder()
+                .AppendLine("Title :" + this.Title)
+                .AppendLine("Author :" + this.Author)
+                .AppendLine("Year :" + this.Year)
+                .AppendLine("Category :" + this.CategoryNavigation.Name)
+                .AppendLine("Description :" + this.Description)
+                .AppendLine("Total number :" + this.TotalNumber)
+                .AppendLine("Available :" + this.Available)
+                .ToString();
+        }
     }
 }

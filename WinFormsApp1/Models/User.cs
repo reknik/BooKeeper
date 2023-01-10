@@ -6,39 +6,38 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace BooKeeper.Models;
-
-[Table("user")]
-public partial class User
+namespace BooKeeper.Models
 {
-    public User()
+    [Table("user")]
+    public partial class User
     {
-        Books = new HashSet<Book>();
+        public User()
+        {
+            UserBooks = new HashSet<UserBook>();
+        }
+
+        public User(string username, string password)
+        {
+            Username = username;
+            Password = password;
+        }
+
+        [Required]
+        [Column("username")]
+        [StringLength(16)]
+        public string Username { get; set; }
+        [Column("email")]
+        [StringLength(255)]
+        public string Email { get; set; }
+        [Required]
+        [Column("password")]
+        [StringLength(128)]
+        public string Password { get; set; }
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+
+        [InverseProperty(nameof(UserBook.User))]
+        public virtual ICollection<UserBook> UserBooks { get; set; }
     }
-
-    public User(string username, string password)
-    {
-        this.Username = username;
-        this.Password = password;
-        Books = new HashSet<Book>();
-    }
-
-    [Required]
-    [Column("username")]
-    [StringLength(16)]
-    public string Username { get; set; }
-    [Column("email")]
-    [StringLength(255)]
-    public string Email { get; set; }
-    [Required]
-    [Column("password")]
-    [StringLength(32)]
-    public string Password { get; set; }
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    [Column("id")]
-    public int Id { get; set; }
-
-    [InverseProperty(nameof(Book.LoanerNavigation))]
-    public virtual ICollection<Book> Books { get; set; }
 }

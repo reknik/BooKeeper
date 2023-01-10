@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace BooKeeper.Services.Impl;
+namespace BooKeeper.Repositories.Impl;
 
 public class UserRepository : IUserRepository
 {

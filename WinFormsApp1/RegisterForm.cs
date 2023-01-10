@@ -1,5 +1,4 @@
 ﻿using BooKeeper.Models;
-using BooKeeper.Services;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Configuration;
@@ -12,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using BooKeeper.Repositories;
 
 namespace BooKeeper;
 public partial class RegisterForm : Form

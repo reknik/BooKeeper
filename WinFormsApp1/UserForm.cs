@@ -1,7 +1,8 @@
 ﻿using BooKeeper.Models;
-using BooKeeper.Services;
-using BooKeeper.Services.Impl;
+using BooKeeper.Models.DTO;
+using BooKeeper.Repositories;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,6 +22,8 @@ public partial class UserForm : Form
 
     private readonly ICategoryRepository _categoryRepository;
 
+    
+
     public UserForm(User user, IBookRepository bookRepository, ICategoryRepository categoryRepository)
     {
         this._user = user;
@@ -31,44 +34,74 @@ public partial class UserForm : Form
 
         initializeUserBookList();
 
-        initializeAllBooksList();
+        initializeAllBooksGridView();
     }
 
-    private void initializeAllBooksList()
+    private void initializeAllBooksGridView()
     {
-        allBooks.DisplayMember = "Title";
-        allBooks.ValueMember = "Title";
-        _bookRepository.GetAllBooks().DistinctBy(book => book.Title).ToList().ForEach(book => allBooks.Items.Add(book));
+        allBooksList.DisplayMember = "Title";
+        allBooksList.ValueMember = "Id";
+        _bookRepository.GetAllBooks().DistinctBy(book => book.Title).ToList().ForEach(book => allBooksList.Items.Add(book)); ;
     }
-
     private void initializeUserBookList()
     {
         userBookList.DisplayMember = "Title";
         userBookList.ValueMember = "Id";
+        List<Book> books = _bookRepository.GetBooksByUser(_user).ToList();
         _bookRepository.GetBooksByUser(_user).ToList().ForEach(book => userBookList.Items.Add(book));
     }
 
     private void reserveButton_Click(object sender, EventArgs e)
     {
+        if(allBooksList.SelectedItem == null)
+        {
+            MessageBox.Show("Please select a book");
+            return;
+        }
+
         DialogResult dr = MessageBox.Show("Are you sure you want to reserve this book?", 
             "Confirmation", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+        Book selectedBook = (Book)allBooksList.SelectedItem;
+        if (selectedBook.Available.Equals(0))
+        {
+            MessageBox.Show("No books available");
+            return;
+        }
+        _bookRepository.ReserveBook(_user, selectedBook);
+        allBooksList_SelectedIndexChanged(sender, e);
+        userBookList_SelectedIndexChanged(sender, e);
 
     }
 
     private void userBookList_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if(userBookList.SelectedValue == null)
+        if(userBookList.SelectedItem == null)
         {
-            selectedBookTextBox.Text = null;
+            userBookTextBox.Text = null;
+            return;
+        }  
+        Book? selectedBook = ((Book)userBookList.SelectedItem);
+        if (selectedBook == null)
+        {
+            userBookTextBox.Text = null;
             return;
         }
-        int selectedBookId =  (int) userBookList.SelectedValue;
-        Book? selectedBook = _bookRepository.GetBookById(selectedBookId);
-        if(selectedBook == null)
+        userBookTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+    }
+
+    private void allBooksList_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (allBooksList.SelectedItem == null)
         {
-            selectedBookTextBox.Text = null;
+            allBooksTextBox.Text = null;
             return;
         }
-        selectedBookTextBox.Text = selectedBook.ToString();
+        Book? selectedBook = ((Book)allBooksList.SelectedItem);
+        if (selectedBook == null)
+        {
+            allBooksTextBox.Text = null;
+            return;
+        }
+        allBooksTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
     }
 }

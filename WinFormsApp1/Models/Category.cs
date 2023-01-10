@@ -6,24 +6,25 @@ using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
-namespace BooKeeper.Models;
-
-[Table("category")]
-public partial class Category
+namespace BooKeeper.Models
 {
-    public Category()
+    [Table("category")]
+    public partial class Category
     {
-        Books = new HashSet<Book>();
+        public Category()
+        {
+            Books = new HashSet<Book>();
+        }
+
+        [Key]
+        [Column("id")]
+        public int Id { get; set; }
+        [Required]
+        [Column("name")]
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [InverseProperty(nameof(Book.CategoryNavigation))]
+        public virtual ICollection<Book> Books { get; set; }
     }
-
-    [Key]
-    [Column("category_id")]
-    public int CategoryId { get; set; }
-    [Required]
-    [Column("name")]
-    [StringLength(255)]
-    public string Name { get; set; }
-
-    [InverseProperty(nameof(Book.CategoryNavigation))]
-    public virtual ICollection<Book> Books { get; set; }
 }

@@ -1,7 +1,7 @@
 using BooKeeper;
 using BooKeeper.Data;
-using BooKeeper.Services;
-using BooKeeper.Services.Impl;
+using BooKeeper.Repositories;
+using BooKeeper.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

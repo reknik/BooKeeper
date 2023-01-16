@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp1;
 
 namespace BooKeeper;
 public partial class UserForm : Form
@@ -22,13 +23,14 @@ public partial class UserForm : Form
 
     private readonly ICategoryRepository _categoryRepository;
 
-    
+    private readonly LoginForm _loginForm;
 
-    public UserForm(User user, IBookRepository bookRepository, ICategoryRepository categoryRepository)
+    public UserForm(User user, IBookRepository bookRepository, ICategoryRepository categoryRepository, LoginForm loginForm)
     {
         this._user = user;
         this._bookRepository = bookRepository;
         this._categoryRepository = categoryRepository;
+        this._loginForm = loginForm;
         InitializeComponent();
         welcomeLabel.Text = "Welcome, " + user.Username;
 
@@ -47,6 +49,7 @@ public partial class UserForm : Form
     {
         userBookList.DisplayMember = "Title";
         userBookList.ValueMember = "Id";
+        userBookList.Items.Clear();
         List<Book> books = _bookRepository.GetBooksByUser(_user).ToList();
         _bookRepository.GetBooksByUser(_user).ToList().ForEach(book => userBookList.Items.Add(book));
     }
@@ -74,6 +77,7 @@ public partial class UserForm : Form
         _bookRepository.ReserveBook(_user, selectedBook);
         allBooksList_SelectedIndexChanged(sender, e);
         userBookList_SelectedIndexChanged(sender, e);
+        initializeUserBookList();
 
     }
 
@@ -90,7 +94,13 @@ public partial class UserForm : Form
             userBookTextBox.Text = null;
             return;
         }
-        userBookTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+        try {
+            userBookTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+        }
+        catch (NullReferenceException)
+        {
+            userBookTextBox.Text = "Books couldn't be found";
+        }
     }
 
     private void allBooksList_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,7 +116,14 @@ public partial class UserForm : Form
             allBooksTextBox.Text = null;
             return;
         }
-        allBooksTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+        try 
+        { 
+            allBooksTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+        }
+        catch (NullReferenceException)
+        {
+            allBooksTextBox.Text = "Books couldn't be found";
+        }
     }
 
     private void editBooksButton_Click(object sender, EventArgs e)
@@ -120,5 +137,17 @@ public partial class UserForm : Form
         new EditBookForm((Book)allBooksList.SelectedItem, _categoryRepository, _bookRepository).ShowDialog();
         allBooksList_SelectedIndexChanged(sender, e);
         userBookList_SelectedIndexChanged(sender, e);
+    }
+
+    private void returnButton_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        _loginForm.Show();
+        this.Close();
+    }
+
+    private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        _loginForm.Close();
     }
 }

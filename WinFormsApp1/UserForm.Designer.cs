@@ -30,6 +30,7 @@ partial class UserForm
     {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.returnButton = new System.Windows.Forms.Button();
             this.allBooksList = new System.Windows.Forms.ListBox();
             this.editBooksButton = new System.Windows.Forms.Button();
             this.reserveButton = new System.Windows.Forms.Button();
@@ -47,6 +48,7 @@ partial class UserForm
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.returnButton);
             this.panel1.Controls.Add(this.allBooksList);
             this.panel1.Controls.Add(this.editBooksButton);
             this.panel1.Controls.Add(this.reserveButton);
@@ -60,6 +62,16 @@ partial class UserForm
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(781, 248);
             this.panel1.TabIndex = 0;
+            // 
+            // returnButton
+            // 
+            this.returnButton.Location = new System.Drawing.Point(264, 183);
+            this.returnButton.Name = "returnButton";
+            this.returnButton.Size = new System.Drawing.Size(176, 23);
+            this.returnButton.TabIndex = 12;
+            this.returnButton.Text = "Return to login";
+            this.returnButton.UseVisualStyleBackColor = true;
+            this.returnButton.Click += new System.EventHandler(this.returnButton_Click);
             // 
             // allBooksList
             // 
@@ -154,6 +166,7 @@ partial class UserForm
             this.Controls.Add(this.panel1);
             this.Name = "UserForm";
             this.Text = "BooKeeper";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bookNumberDTOBindingSource)).EndInit();
@@ -175,4 +188,5 @@ partial class UserForm
     private BindingSource bookNumberDTOBindingSource;
     private BindingSource bookNumberDTOBindingSource1;
     private ListBox allBooksList;
+    private Button returnButton;
 }

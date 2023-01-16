@@ -48,6 +48,7 @@ public partial class RegisterForm : Form
         if (passwordTextBox.Text.Length < 2)
         {
             passwordErrorLabel.Text = "Password must be at least 2 characters long";
+            return;
         }
         passwordErrorLabel.Text = null;
     }
@@ -57,6 +58,7 @@ public partial class RegisterForm : Form
         if (!confirmPasswordTextBox.Text.Equals(passwordTextBox.Text))
         {
             confirmPasswordErrorLabel.Text = "Passwords must match";
+            return;
         }
         confirmPasswordErrorLabel.Text = null;
     }

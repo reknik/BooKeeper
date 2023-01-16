@@ -39,7 +39,7 @@ public partial class LoginForm : Form
             return;
         }
         this.Hide();
-        new UserForm(user,_bookRepository,_categoryRepository ).Show();
+        new UserForm(user,_bookRepository,_categoryRepository, this).Show();
     }
 
     private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

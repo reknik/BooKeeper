@@ -1,6 +1,7 @@
 ﻿using BooKeeper.Models;
 using BooKeeper.Models.DTO;
 using BooKeeper.Repositories;
+using ObjectLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,7 +52,10 @@ public partial class UserForm : Form
         userBookList.ValueMember = "Id";
         userBookList.Items.Clear();
         List<Book> books = _bookRepository.GetBooksByUser(_user).ToList();
-        _bookRepository.GetBooksByUser(_user).ToList().ForEach(book => userBookList.Items.Add(book));
+        if (!ObjectUtils.isEnumerableEmpty(books))
+        {
+            _bookRepository.GetBooksByUser(_user).ToList().ForEach(book => userBookList.Items.Add(book));
+        }
     }
 
     private void reserveButton_Click(object sender, EventArgs e)

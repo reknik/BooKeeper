@@ -1,12 +1,13 @@
-using BooKeeper;
 using BooKeeper.Data;
 using BooKeeper.Repositories;
 using BooKeeper.Repositories.Impl;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ObjectLibrary;
+using WinFormsApp1;
 
-namespace WinFormsApp1
+namespace BooKeeper
 {
     internal static class Program
     {
@@ -34,7 +35,8 @@ namespace WinFormsApp1
         static IHostBuilder CreateHostBuilder()
         {
             return Host.CreateDefaultBuilder()
-                .ConfigureServices((context, services) => {
+                .ConfigureServices((context, services) =>
+                {
                     services.AddDbContext<DbContext, BookDbContext>();
                     services.AddScoped<IBookRepository, BookRepository>();
                     services.AddScoped<IUserRepository, UserRepository>();

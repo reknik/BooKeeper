@@ -70,6 +70,16 @@ namespace BooKeeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        public static byte[] Library {
+            get {
+                object obj = ResourceManager.GetObject("Library", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
         public static System.IO.UnmanagedMemoryStream Meow {

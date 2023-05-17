@@ -30,6 +30,8 @@ partial class UserForm
     {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
+            this.changeProfileButton = new System.Windows.Forms.Button();
             this.profilePictureBox = new System.Windows.Forms.PictureBox();
             this.myCoverBox = new System.Windows.Forms.PictureBox();
             this.allCoverBox = new System.Windows.Forms.PictureBox();
@@ -47,8 +49,9 @@ partial class UserForm
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.bookNumberDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bookNumberDTOBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.changeProfileButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.myCoverBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.allCoverBox)).BeginInit();
@@ -58,6 +61,8 @@ partial class UserForm
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.vlcControl1);
             this.panel1.Controls.Add(this.changeProfileButton);
             this.panel1.Controls.Add(this.profilePictureBox);
             this.panel1.Controls.Add(this.myCoverBox);
@@ -77,12 +82,33 @@ partial class UserForm
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1390, 572);
+            this.panel1.Size = new System.Drawing.Size(892, 423);
             this.panel1.TabIndex = 0;
+            // 
+            // vlcControl1
+            // 
+            this.vlcControl1.BackColor = System.Drawing.Color.Black;
+            this.vlcControl1.Location = new System.Drawing.Point(19, 235);
+            this.vlcControl1.Name = "vlcControl1";
+            this.vlcControl1.Size = new System.Drawing.Size(302, 173);
+            this.vlcControl1.Spu = -1;
+            this.vlcControl1.TabIndex = 21;
+            this.vlcControl1.VlcLibDirectory = new DirectoryInfo("C:\\Program Files\\VideoLAN\\VLC");
+            this.vlcControl1.VlcMediaplayerOptions = null;
+            // 
+            // changeProfileButton
+            // 
+            this.changeProfileButton.Location = new System.Drawing.Point(637, 388);
+            this.changeProfileButton.Name = "changeProfileButton";
+            this.changeProfileButton.Size = new System.Drawing.Size(137, 23);
+            this.changeProfileButton.TabIndex = 20;
+            this.changeProfileButton.Text = "Change profile settings";
+            this.changeProfileButton.UseVisualStyleBackColor = true;
+            this.changeProfileButton.Click += new System.EventHandler(this.changeProfileButton_Click);
             // 
             // profilePictureBox
             // 
-            this.profilePictureBox.Location = new System.Drawing.Point(875, 12);
+            this.profilePictureBox.Location = new System.Drawing.Point(780, 358);
             this.profilePictureBox.Name = "profilePictureBox";
             this.profilePictureBox.Size = new System.Drawing.Size(100, 50);
             this.profilePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -91,25 +117,25 @@ partial class UserForm
             // 
             // myCoverBox
             // 
-            this.myCoverBox.Location = new System.Drawing.Point(326, 68);
+            this.myCoverBox.Location = new System.Drawing.Point(327, 39);
             this.myCoverBox.Name = "myCoverBox";
-            this.myCoverBox.Size = new System.Drawing.Size(153, 152);
+            this.myCoverBox.Size = new System.Drawing.Size(117, 152);
             this.myCoverBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.myCoverBox.TabIndex = 18;
             this.myCoverBox.TabStop = false;
             // 
             // allCoverBox
             // 
-            this.allCoverBox.Location = new System.Drawing.Point(822, 68);
+            this.allCoverBox.Location = new System.Drawing.Point(767, 39);
             this.allCoverBox.Name = "allCoverBox";
-            this.allCoverBox.Size = new System.Drawing.Size(153, 152);
+            this.allCoverBox.Size = new System.Drawing.Size(113, 152);
             this.allCoverBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.allCoverBox.TabIndex = 17;
             this.allCoverBox.TabStop = false;
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(256, 270);
+            this.nextButton.Location = new System.Drawing.Point(503, 388);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(45, 23);
             this.nextButton.TabIndex = 16;
@@ -119,7 +145,7 @@ partial class UserForm
             // 
             // playButton
             // 
-            this.playButton.Location = new System.Drawing.Point(205, 270);
+            this.playButton.Location = new System.Drawing.Point(452, 388);
             this.playButton.Name = "playButton";
             this.playButton.Size = new System.Drawing.Size(45, 23);
             this.playButton.TabIndex = 15;
@@ -129,7 +155,7 @@ partial class UserForm
             // 
             // muteButton
             // 
-            this.muteButton.Location = new System.Drawing.Point(154, 270);
+            this.muteButton.Location = new System.Drawing.Point(401, 388);
             this.muteButton.Name = "muteButton";
             this.muteButton.Size = new System.Drawing.Size(45, 23);
             this.muteButton.TabIndex = 14;
@@ -139,7 +165,7 @@ partial class UserForm
             // 
             // returnButton
             // 
-            this.returnButton.Location = new System.Drawing.Point(144, 229);
+            this.returnButton.Location = new System.Drawing.Point(145, 200);
             this.returnButton.Name = "returnButton";
             this.returnButton.Size = new System.Drawing.Size(176, 23);
             this.returnButton.TabIndex = 12;
@@ -151,7 +177,7 @@ partial class UserForm
             // 
             this.allBooksList.FormattingEnabled = true;
             this.allBooksList.ItemHeight = 15;
-            this.allBooksList.Location = new System.Drawing.Point(509, 68);
+            this.allBooksList.Location = new System.Drawing.Point(454, 39);
             this.allBooksList.Name = "allBooksList";
             this.allBooksList.Size = new System.Drawing.Size(120, 184);
             this.allBooksList.TabIndex = 11;
@@ -159,7 +185,7 @@ partial class UserForm
             // 
             // editBooksButton
             // 
-            this.editBooksButton.Location = new System.Drawing.Point(635, 264);
+            this.editBooksButton.Location = new System.Drawing.Point(580, 235);
             this.editBooksButton.Name = "editBooksButton";
             this.editBooksButton.Size = new System.Drawing.Size(176, 23);
             this.editBooksButton.TabIndex = 10;
@@ -169,7 +195,7 @@ partial class UserForm
             // 
             // reserveButton
             // 
-            this.reserveButton.Location = new System.Drawing.Point(635, 229);
+            this.reserveButton.Location = new System.Drawing.Point(580, 200);
             this.reserveButton.Name = "reserveButton";
             this.reserveButton.Size = new System.Drawing.Size(176, 23);
             this.reserveButton.TabIndex = 9;
@@ -179,7 +205,7 @@ partial class UserForm
             // 
             // allBooksTextBox
             // 
-            this.allBooksTextBox.Location = new System.Drawing.Point(635, 68);
+            this.allBooksTextBox.Location = new System.Drawing.Point(580, 39);
             this.allBooksTextBox.Name = "allBooksTextBox";
             this.allBooksTextBox.ReadOnly = true;
             this.allBooksTextBox.Size = new System.Drawing.Size(176, 152);
@@ -188,7 +214,7 @@ partial class UserForm
             // 
             // userBookTextBox
             // 
-            this.userBookTextBox.Location = new System.Drawing.Point(144, 68);
+            this.userBookTextBox.Location = new System.Drawing.Point(145, 39);
             this.userBookTextBox.Name = "userBookTextBox";
             this.userBookTextBox.ReadOnly = true;
             this.userBookTextBox.Size = new System.Drawing.Size(176, 152);
@@ -199,7 +225,7 @@ partial class UserForm
             // 
             this.userBookList.FormattingEnabled = true;
             this.userBookList.ItemHeight = 15;
-            this.userBookList.Location = new System.Drawing.Point(18, 68);
+            this.userBookList.Location = new System.Drawing.Point(19, 39);
             this.userBookList.Name = "userBookList";
             this.userBookList.Size = new System.Drawing.Size(120, 184);
             this.userBookList.TabIndex = 5;
@@ -210,7 +236,7 @@ partial class UserForm
             this.Title.AutoSize = true;
             this.Title.BackColor = System.Drawing.Color.Transparent;
             this.Title.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Title.Location = new System.Drawing.Point(18, 24);
+            this.Title.Location = new System.Drawing.Point(19, 9);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(105, 23);
             this.Title.TabIndex = 4;
@@ -219,7 +245,7 @@ partial class UserForm
             // welcomeLabel
             // 
             this.welcomeLabel.AutoSize = true;
-            this.welcomeLabel.Location = new System.Drawing.Point(732, 24);
+            this.welcomeLabel.Location = new System.Drawing.Point(637, 370);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(38, 15);
             this.welcomeLabel.TabIndex = 0;
@@ -233,27 +259,27 @@ partial class UserForm
             // 
             this.bookNumberDTOBindingSource1.DataSource = typeof(BooKeeper.Models.DTO.BookNumberDTO);
             // 
-            // changeProfileButton
+            // label1
             // 
-            this.changeProfileButton.Location = new System.Drawing.Point(732, 42);
-            this.changeProfileButton.Name = "changeProfileButton";
-            this.changeProfileButton.Size = new System.Drawing.Size(137, 23);
-            this.changeProfileButton.TabIndex = 20;
-            this.changeProfileButton.Text = "Change profile settings";
-            this.changeProfileButton.UseVisualStyleBackColor = true;
-            this.changeProfileButton.Click += new System.EventHandler(this.changeProfileButton_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(433, 358);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 15);
+            this.label1.TabIndex = 22;
+            this.label1.Text = "Music controls";
             // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1390, 572);
+            this.ClientSize = new System.Drawing.Size(892, 423);
             this.Controls.Add(this.panel1);
             this.Name = "UserForm";
             this.Text = "BooKeeper";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UserForm_FormClosing);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.myCoverBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.allCoverBox)).EndInit();
@@ -284,4 +310,6 @@ partial class UserForm
     private PictureBox myCoverBox;
     private PictureBox profilePictureBox;
     private Button changeProfileButton;
+    private Vlc.DotNet.Forms.VlcControl vlcControl1;
+    private Label label1;
 }

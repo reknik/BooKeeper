@@ -121,6 +121,9 @@
   <data name="JustRelax" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\just-relax-11157.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="Library" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Library.mp4;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Meow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Gotye - Somebody That Used To Meow.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>

@@ -41,6 +41,7 @@ public partial class UserForm : Form
         this._musicBox = musicBox;
         
         InitializeComponent();
+        vlcControl1.Play(new FileInfo("C:\\Users\\Alex\\Downloads\\library.mp4"));
         welcomeLabel.Text = "Welcome, " + user.Username;
         if(user.ProfilePicturePath!= null )
         {

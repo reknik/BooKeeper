@@ -1,6 +1,7 @@
 using BooKeeper.Data;
 using BooKeeper.Repositories;
 using BooKeeper.Repositories.Impl;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,7 +29,15 @@ namespace BooKeeper
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            using var scope = host.Services.CreateScope();
+
+            var services = scope.ServiceProvider;
+
+            var initialiser = services.GetRequiredService<DbInitialiser>();
+
+            initialiser.Run();
             Application.Run(ServiceProvider.GetRequiredService<LoginForm>());
+            
         }
 
         public static IServiceProvider? ServiceProvider { get; private set; }
@@ -43,6 +52,8 @@ namespace BooKeeper
                     services.AddScoped<ICategoryRepository, CategoryRepository>();
                     services.AddScoped<LoginForm>();
                     services.AddScoped<RegisterForm>();
+                    services.AddScoped<MusicBox>();
+                    services.AddTransient<DbInitialiser>();
                 });
         }
     }

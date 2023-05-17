@@ -33,6 +33,10 @@ namespace BooKeeper.Models
         [Column("description")]
         [StringLength(250)]
         public string Description { get; set; }
+
+        [Column("cover")]
+        [StringLength(450)]
+        public string CoverPath { get; set; }
         [Column("available")]
         public int Available { get; set; }
         [Column("totalNumber")]

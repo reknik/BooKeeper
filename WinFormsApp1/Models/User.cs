@@ -29,6 +29,19 @@ namespace BooKeeper.Models
         [Column("email")]
         [StringLength(255)]
         public string Email { get; set; }
+
+        [Column("first_name")]
+        [StringLength(255)]
+        public string FirstName { get; set; }
+
+        [Column("last_name")]
+        [StringLength(255)]
+        public string LastName { get; set; }
+
+        [Column("profile_picture")]
+        [StringLength(450)]
+        public string ProfilePicturePath { get; set; }
+
         [Required]
         [Column("password")]
         [StringLength(128)]

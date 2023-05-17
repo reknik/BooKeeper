@@ -1,4 +1,5 @@
-﻿using BooKeeper.Models;
+﻿using BooKeeper.Data;
+using BooKeeper.Models;
 using BooKeeper.Models.DTO;
 using BooKeeper.Repositories;
 using ObjectLibrary;
@@ -22,19 +23,31 @@ public partial class UserForm : Form
 
     private readonly IBookRepository _bookRepository;
 
+    private readonly IUserRepository _userRepository;
+
     private readonly ICategoryRepository _categoryRepository;
 
     private readonly LoginForm _loginForm;
 
-    public UserForm(User user, IBookRepository bookRepository, ICategoryRepository categoryRepository, LoginForm loginForm)
+    private readonly MusicBox _musicBox;
+
+    public UserForm(User user, IBookRepository bookRepository, ICategoryRepository categoryRepository, LoginForm loginForm, MusicBox musicBox, IUserRepository userRepository)
     {
         this._user = user;
         this._bookRepository = bookRepository;
         this._categoryRepository = categoryRepository;
+        this._userRepository = userRepository;
         this._loginForm = loginForm;
+        this._musicBox = musicBox;
+        
         InitializeComponent();
         welcomeLabel.Text = "Welcome, " + user.Username;
-
+        if(user.ProfilePicturePath!= null )
+        {
+            profilePictureBox.Image = Image.FromFile(user.ProfilePicturePath);
+        }
+        
+        //vlcControl1.Play(new FileInfo(@"C:\Users\Alex\Downloads\library.mp4"));
         initializeUserBookList();
 
         initializeAllBooksGridView();
@@ -85,21 +98,29 @@ public partial class UserForm : Form
 
     }
 
+    public void changeProfilePicture(String newProfilePicturePath)
+    {
+        profilePictureBox.Image = Image.FromFile(newProfilePicturePath);
+    }
+
     private void userBookList_SelectedIndexChanged(object sender, EventArgs e)
     {
         if(userBookList.SelectedItem == null)
         {
             userBookTextBox.Text = null;
+            myCoverBox.Image = null;
             return;
         }  
         Book? selectedBook = ((Book)userBookList.SelectedItem);
         if (selectedBook == null)
         {
             userBookTextBox.Text = null;
+            myCoverBox.Image = null;
             return;
         }
         try {
             userBookTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+            myCoverBox.Image = Image.FromFile(selectedBook.CoverPath);
         }
         catch (NullReferenceException)
         {
@@ -112,17 +133,20 @@ public partial class UserForm : Form
         if (allBooksList.SelectedItem == null)
         {
             allBooksTextBox.Text = null;
+            allCoverBox.Image = null;
             return;
         }
         Book? selectedBook = ((Book)allBooksList.SelectedItem);
         if (selectedBook == null)
         {
             allBooksTextBox.Text = null;
+            allCoverBox.Image = null;
             return;
         }
         try 
         { 
             allBooksTextBox.Text = _bookRepository.GetBookByIdWithCategory(selectedBook.Id).ToString();
+            allCoverBox.Image = Image.FromFile(selectedBook.CoverPath);
         }
         catch (NullReferenceException)
         {
@@ -153,5 +177,26 @@ public partial class UserForm : Form
     private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
     {
         _loginForm.Close();
+    }
+
+    private void muteButton_Click(object sender, EventArgs e)
+    {
+        this._musicBox.stop();
+    }
+
+    private void playButton_Click(object sender, EventArgs e)
+    {
+        this._musicBox.play();
+    }
+
+    private void nextButton_Click(object sender, EventArgs e)
+    {
+        this._musicBox.nextSong();
+    }
+
+    private void changeProfileButton_Click(object sender, EventArgs e)
+    {
+        EditUserForm editUserForm = new EditUserForm(_user, _userRepository, this);
+        editUserForm.ShowDialog();
     }
 }

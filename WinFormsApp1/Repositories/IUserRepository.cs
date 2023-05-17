@@ -13,4 +13,5 @@ public interface IUserRepository
     User? GetUserByUsername(string username);
 
     void SaveUser(User user);
+    void UpdateUser(User user);
 }

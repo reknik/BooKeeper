@@ -31,12 +31,14 @@ partial class RegisterForm
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.usernameTextBox = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Title = new System.Windows.Forms.Label();
             this.confirmPasswordErrorLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordErrorLabel = new System.Windows.Forms.Label();
             this.confirmPasswordTextBox = new System.Windows.Forms.TextBox();
             this.registerButton = new System.Windows.Forms.Button();
-            this.Title = new System.Windows.Forms.Label();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
+            this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,6 +64,8 @@ partial class RegisterForm
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lastNameTextBox);
+            this.panel1.Controls.Add(this.firstNameTextBox);
             this.panel1.Controls.Add(this.Title);
             this.panel1.Controls.Add(this.passwordTextBox);
             this.panel1.Controls.Add(this.confirmPasswordErrorLabel);
@@ -73,8 +77,18 @@ partial class RegisterForm
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(219, 271);
+            this.panel1.Size = new System.Drawing.Size(189, 325);
             this.panel1.TabIndex = 8;
+            // 
+            // Title
+            // 
+            this.Title.AutoSize = true;
+            this.Title.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Title.Location = new System.Drawing.Point(38, 9);
+            this.Title.Name = "Title";
+            this.Title.Size = new System.Drawing.Size(105, 23);
+            this.Title.TabIndex = 7;
+            this.Title.Text = "BooKeeper !!";
             // 
             // confirmPasswordErrorLabel
             // 
@@ -113,7 +127,7 @@ partial class RegisterForm
             // 
             // registerButton
             // 
-            this.registerButton.Location = new System.Drawing.Point(38, 232);
+            this.registerButton.Location = new System.Drawing.Point(51, 278);
             this.registerButton.Name = "registerButton";
             this.registerButton.Size = new System.Drawing.Size(75, 23);
             this.registerButton.TabIndex = 2;
@@ -121,21 +135,27 @@ partial class RegisterForm
             this.registerButton.UseVisualStyleBackColor = true;
             this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
             // 
-            // Title
+            // firstNameTextBox
             // 
-            this.Title.AutoSize = true;
-            this.Title.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Title.Location = new System.Drawing.Point(38, 9);
-            this.Title.Name = "Title";
-            this.Title.Size = new System.Drawing.Size(105, 23);
-            this.Title.TabIndex = 7;
-            this.Title.Text = "BooKeeper !!";
+            this.firstNameTextBox.Location = new System.Drawing.Point(23, 220);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.PlaceholderText = "First Name";
+            this.firstNameTextBox.Size = new System.Drawing.Size(138, 23);
+            this.firstNameTextBox.TabIndex = 12;
+            // 
+            // lastNameTextBox
+            // 
+            this.lastNameTextBox.Location = new System.Drawing.Point(23, 249);
+            this.lastNameTextBox.Name = "lastNameTextBox";
+            this.lastNameTextBox.PlaceholderText = "Last Name";
+            this.lastNameTextBox.Size = new System.Drawing.Size(138, 23);
+            this.lastNameTextBox.TabIndex = 13;
             // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(219, 271);
+            this.ClientSize = new System.Drawing.Size(189, 325);
             this.Controls.Add(this.panel1);
             this.Name = "RegisterForm";
             this.Text = "Register";
@@ -156,4 +176,6 @@ partial class RegisterForm
     private Label confirmPasswordErrorLabel;
     private Label usernameLabel;
     private Label passwordErrorLabel;
+    private TextBox lastNameTextBox;
+    private TextBox firstNameTextBox;
 }

@@ -33,6 +33,9 @@
             this.loginButton = new System.Windows.Forms.Button();
             this.Title = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.nextButton = new System.Windows.Forms.Button();
+            this.playButton = new System.Windows.Forms.Button();
+            this.muteButton = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.errorLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -78,6 +81,9 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.nextButton);
+            this.panel1.Controls.Add(this.playButton);
+            this.panel1.Controls.Add(this.muteButton);
             this.panel1.Controls.Add(this.usernameTextBox);
             this.panel1.Controls.Add(this.Title);
             this.panel1.Controls.Add(this.linkLabel1);
@@ -87,8 +93,38 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(255, 215);
+            this.panel1.Size = new System.Drawing.Size(238, 239);
             this.panel1.TabIndex = 4;
+            // 
+            // nextButton
+            // 
+            this.nextButton.Location = new System.Drawing.Point(143, 204);
+            this.nextButton.Name = "nextButton";
+            this.nextButton.Size = new System.Drawing.Size(45, 23);
+            this.nextButton.TabIndex = 7;
+            this.nextButton.Text = "next";
+            this.nextButton.UseVisualStyleBackColor = true;
+            this.nextButton.Click += new System.EventHandler(this.nextButton_Click);
+            // 
+            // playButton
+            // 
+            this.playButton.Location = new System.Drawing.Point(92, 204);
+            this.playButton.Name = "playButton";
+            this.playButton.Size = new System.Drawing.Size(45, 23);
+            this.playButton.TabIndex = 6;
+            this.playButton.Text = "play";
+            this.playButton.UseVisualStyleBackColor = true;
+            this.playButton.Click += new System.EventHandler(this.playButton_Click);
+            // 
+            // muteButton
+            // 
+            this.muteButton.Location = new System.Drawing.Point(41, 204);
+            this.muteButton.Name = "muteButton";
+            this.muteButton.Size = new System.Drawing.Size(45, 23);
+            this.muteButton.TabIndex = 5;
+            this.muteButton.Text = "mute";
+            this.muteButton.UseVisualStyleBackColor = true;
+            this.muteButton.Click += new System.EventHandler(this.muteButton_Click);
             // 
             // linkLabel1
             // 
@@ -115,7 +151,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(255, 215);
+            this.ClientSize = new System.Drawing.Size(238, 239);
             this.Controls.Add(this.panel1);
             this.Name = "LoginForm";
             this.Text = "BooKeeper";
@@ -134,5 +170,8 @@
         private Panel panel1;
         private Label errorLabel;
         private LinkLabel linkLabel1;
+        private Button muteButton;
+        private Button nextButton;
+        private Button playButton;
     }
 }

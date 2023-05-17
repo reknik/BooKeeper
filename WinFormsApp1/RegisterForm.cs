@@ -22,7 +22,26 @@ public partial class RegisterForm : Form
     public RegisterForm(IUserRepository userRepository)
     {
         this._userRepository = userRepository;
+       
         InitializeComponent();
+        this.usernameTextBox.Validating -= new CancelEventHandler(this.usernameTextBox_Validating);
+        this.usernameTextBox.Validating += (object sender, CancelEventArgs e) =>
+        {
+            usernameLabel.ForeColor = Color.Blue;
+            if (usernameTextBox.Text.Length < 2)
+            {
+                usernameLabel.Text = "Username must be at least 2 characters long";
+                return;
+            }
+            User? user = _userRepository.GetUserByUsername(usernameTextBox.Text.Trim());
+            if (user != null)
+            {
+                usernameLabel.Text = "Username already taken";
+                return;
+            }
+            usernameLabel.ForeColor = Color.Blue;
+            usernameLabel.Text = "Username is available";
+        };
     }
 
     private void usernameTextBox_Validating(object sender, CancelEventArgs e)
@@ -74,7 +93,10 @@ public partial class RegisterForm : Form
         }
         string username = usernameTextBox.Text.Trim();
         string password = BCrypt.Net.BCrypt.HashPassword(passwordTextBox.Text.Trim());
-        _userRepository.SaveUser(new User(username, password));
+        User newUser = new User(username, password);
+        newUser.FirstName = firstNameTextBox.Text.Trim();
+        newUser.LastName = lastNameTextBox.Text.Trim();
+        _userRepository.SaveUser(newUser);
         MessageBox.Show("Registration successful");
         this.Close();
     }
